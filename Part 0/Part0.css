@@ -1,0 +1,55 @@
+body{
+    background-color: lightgreen
+}
+.fit-picture {
+    width: 100px;
+}
+
+li {
+    color: blue;
+    list-style-type: circle;
+}
+
+li li {
+    color: blue;
+    list-style-type: disc;
+}
+
+table,
+td {
+    border: 1px solid white;
+}
+
+thead,
+tfoot {
+    background-color: rgb(99, 99, 99);
+    color: rgb(13, 2, 168);
+}
+
+a[href^="https"]::before {
+    content: "🔗 ";
+  }
+  
+li {
+    margin-bottom: .5rem;
+  }
+
+a:hover { 
+    background-color: yellow;
+  }
+form.contact-form {
+    display: table;
+}
+
+div.contact-form {
+    display: table-row;
+}
+
+label, input {
+    display: table-cell;
+    margin-bottom: 15px;
+}
+
+label {
+    padding-right: 15px;
+}
