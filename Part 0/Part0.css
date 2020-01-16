@@ -3,37 +3,54 @@ body{
 }
 .fit-picture {
     width: 100px;
+    height: auto;
+    margin-top: 5px;
 }
-
+div#image{
+     background-color: blue;
+     text-align: center;
+}
+.container{
+     padding: 10px;
+     border: dotted;
+}
 li {
     color: blue;
     list-style-type: circle;
+    font-weight: bold;
+    margin-bottom: .5rem;
 }
 
 li li {
     color: blue;
     list-style-type: disc;
+    font-weight: lighter;
 }
-
+.table{
+     width: fit-content;
+     margin-left: 50px;
+     background-color: white;
+     
+}
+table,th{padding-left: 5px;}
 table,
-td {
-    border: 1px solid white;
+td {border-collapse: collapse;
+    border: 1px solid black;
+    text-align: left;
+    padding-left: 5px;
 }
-
+caption{
+     caption-side: bottom;
+     text-align: right;
+     font-size: small;
+     background-color: lightgreen;
+}
 thead,
 tfoot {
-    background-color: rgb(99, 99, 99);
-    color: rgb(13, 2, 168);
+    background-color: rgb(228, 42, 150);
+    color: whitesmoke;
 }
-
-a[href^="https"]::before {
-    content: "🔗 ";
-  }
   
-li {
-    margin-bottom: .5rem;
-  }
-
 a:hover { 
     background-color: yellow;
   }
