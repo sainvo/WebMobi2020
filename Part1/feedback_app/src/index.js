@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import ReactDOM from 'react-dom'
 
-//STEP 5: CHILD COMPONENT FOR BUTTONS (already done from step 1)
+
 const Button = ({onClick, text}) => (
     <button onClick = {onClick}>
         {text}
     </button>
 )
-//STEP 5: CHILD COMPONENT FOR SINGLE STATISTIC
+
 const Statistic = (props) => {
     return(
         <tr>            
@@ -17,8 +17,7 @@ const Statistic = (props) => {
     )
 
 }
-//CHILD COMPONENT FOR STATISTICS
-// this was supposed to be done in step 3 but I already implemented this from step 1
+
 const Stats = (props) => {
     console.log(props)
     let good = props.clicksByType[0]
@@ -27,8 +26,7 @@ const Stats = (props) => {
     let diff = good*1 + (-1*bad) + neutral*0//good === 1 and bad === -1, neutral is 0 weight
     let all = props.clicksByType[3].length
     let ave = diff/all
-    // STEP 4 ( again already done at step 1)
-    //STEP 6; html table for statistics
+
     if (props.clicksByType[3].length === 0){
         return(
             <div>
@@ -37,15 +35,14 @@ const Stats = (props) => {
         )
     }
     return(
-        /*<div>
-            <p>Feedback: {all.join(' ')}</p>*/
         <table>
-            <Statistic text="good" value ={props.clicksByType[0]}/>
-            <Statistic text="neutral" value ={props.clicksByType[1]}/>
-            <Statistic text="bad" value={props.clicksByType[2]}/>
-            <Statistic text ="Total:" value = {props.clicksByType[3].length}/>
-            <Statistic text="Average:" value= {Number(ave).toFixed(1)}/>
-            <Statistic text ="Positive feedback:" value= {Number(good/all).toLocaleString(undefined,{style:'percent', minimumFractionDigits:1})}  />
+            <tbody>
+                <Statistic text="good" value ={props.clicksByType[0]}/>
+                <Statistic text="neutral" value ={props.clicksByType[1]}/>
+                <Statistic text="bad" value={props.clicksByType[2]}/>
+                <Statistic text="Average:" value= {Number(ave).toFixed(1)}/>
+                <Statistic text ="Positive feedback:" value= {Number(good/all).toLocaleString(undefined,{style:'percent', minimumFractionDigits:1})}  />
+            </tbody>
         </table>
     )
 }

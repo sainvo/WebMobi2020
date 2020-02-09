@@ -33,27 +33,30 @@ const Content = (props) =>{ //renderöi kurssin osat; param props on array
 }
 
 const Total = (props) =>{ //renderöi kurssin tehtävien kokonaismäärän
+    console.log(props)
+    const exercises = props.course.parts.map(part => part.exercises)
+    console.log(exercises)
     return(
-        <div><b>Total of exercises: {props.course.parts[0].exercises+props.course.parts[1].exercises+props.course.parts[2].exercises}</b></div>
+        <div><b>Total of exercises: {exercises[0]+ exercises[1]+exercises[2]}</b></div>
     )
 } 
 
 
 const App = () => {
     const course ={
-        name: 'Half Stack application development',
+        name: 'Superadvanced web and mobile programming',
         parts: [
             { 
-                name: 'Fundamentals of React',
-                exercises: 10 
+                name: 'Basics of React',
+                exercises: 8 
             },
             {
-                name: 'Using props to pass data',
-                exercises: 7
+                name: 'Using props',
+                exercises: 10
             },
             {
-                name:'State of a component',
-                exercises: 14
+                name:'Component states ',
+                exercises: 12
             }
         ]
     }    
