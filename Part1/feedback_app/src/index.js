@@ -1,3 +1,8 @@
+/*Web and Mobile Development, UTU 
+* Part1 ex6-10
+@author Sanna Volanen
+*/
+
 import React, {useState} from 'react'
 import ReactDOM from 'react-dom'
 
