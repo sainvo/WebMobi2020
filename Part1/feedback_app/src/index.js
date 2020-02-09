@@ -15,7 +15,6 @@ const Statistic = (props) => {
         <td>{props.value}</td>
         </tr>
     )
-
 }
 
 const Stats = (props) => {
