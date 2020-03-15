@@ -7,36 +7,56 @@ class App extends React.Component {
     this.state = {
       persons: [
         {
-          name: 'Arto Hellas' }
+          name: 'Arto Hellas',
+          number: '045 1234 567'  }
       ],
-      newName: ''
+      newName: '', 
+      newNumber: ''
     }
+    this.addContact = this.addContact.bind(this);
+    this.handleNameInput = this.handleNameInput.bind(this);
+    this.handleNumberInput = this.handleNumberInput.bind(this);
   }
   //handles adding the name to list
-  addName= (event) =>{
+  addContact = (event) =>{
     event.preventDefault()
     //const nameObject = 
-    if(this.validateInput(this.state.newName)){
-      const personObject = {name: this.state.newName}
-      const persons = this.state.persons.concat(personObject)
-      this.setState({
-        persons, 
-        newName: ''
-      })
+    if(this.validateNumberInput(this.state.newNumber)){
+      if(this.validateNameInput(this.state.newName)){
+        const personObject = {name: this.state.newName, 
+                              number: this.state.newNumber}
+        const persons = this.state.persons.concat(personObject)
+        this.setState({
+          persons, 
+          newName: '',
+          newNumber: ''
+        })
+      }
     }
     
   }
     
   //updates the changes to state from input field
-  handleNameAdd = (event) =>{
+  handleNameInput = (event) =>{
     console.log(event.target.value)
-    this.setState({newName: event.target.value})
+    this.setState({newName: event.target.value, newNumber: this.state.newNumber})
+  }
+  handleNumberInput = (event) =>{
+    console.log(event.target.value)
+    this.setState({newName: this.state.newName, newNumber: event.target.value})
   }
 
-  validateInput = (temp) => {
+  validateNameInput = (temp) => {
     let people = this.state.persons
     if(people.map(p => p.name).includes(temp)){
-      alert('Tämä henkilö löytyy jo')
+      alert('Tämän niminen henkilö löytyy jo.')
+    }
+    return true
+  }
+  validateNumberInput = (temp) => {
+    let people = this.state.persons
+    if(people.map(p => p.number).includes(temp)){
+      alert('Tämä numero löytyy jo')
       return false
     }
     else{
@@ -48,11 +68,17 @@ class App extends React.Component {
     return (
       <div>
         <h2>Puhelinluettelo</h2>
-        <form onSubmit={this.addName}>
+        <form onSubmit={this.addContact}>
           <div>
             nimi: <input 
                     value={this.state.newName}
-                    onChange={this.handleNameAdd}
+                    onChange={this.handleNameInput}
+                  />
+          </div>
+          <div>
+            numero: <input 
+                    value={this.state.newNumber}
+                    onChange={this.handleNumberInput}
                   />
           </div>
           <div>
