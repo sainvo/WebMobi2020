@@ -1,6 +1,12 @@
 import React from 'react'
 
-const NewEntry = () =>{
+
+//const labels = labels.append(persons.map(i => key));
+
+
+const NewEntryForm = () =>{
+    
+
     return(
         <div>
             <h2>Puhelinluettelo</h2>

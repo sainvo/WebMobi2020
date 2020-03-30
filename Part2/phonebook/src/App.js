@@ -1,5 +1,5 @@
 import React from 'react';
-import NewEntry from '.components/NewEntry';
+import NewEntryForm from './components/NewEntryForm';
 import ViewEntry from './components/ViewEntry';
 
 class App extends React.Component {
@@ -68,7 +68,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NewEntry/>
+        <NewEntryForm />
         <ViewEntry list={this.persons.this.state}/>
         
       </div>
