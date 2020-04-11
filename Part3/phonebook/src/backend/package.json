@@ -1,0 +1,31 @@
+{
+  "name": "phonebook_backend",
+  "version": "0.0.1",
+  "description": "backend made with node and express",
+  "main": "indexB.js",
+  "scripts": {
+    "start": "node indexB.js",
+    "watch": "nodemon indexB.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sainvo/WebMobi2020.git"
+  },
+  "keywords": [
+    "backend",
+    "node"
+  ],
+  "author": "Sanna Volanen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sainvo/WebMobi2020/issues"
+  },
+  "homepage": "https://github.com/sainvo/WebMobi2020#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}

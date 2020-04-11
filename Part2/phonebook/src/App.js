@@ -1,5 +1,6 @@
 import React from 'react';
-import Person from './components/Person'
+import NewEntryForm from './components/NewEntryForm';
+import ViewEntry from './components/ViewEntry';
 
 class App extends React.Component {
   constructor(props) {
@@ -67,35 +68,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>Puhelinluettelo</h2>
-        <form onSubmit={this.addContact}>
-          <div>
-            nimi: <input 
-                    value={this.state.newName}
-                    onChange={this.handleNameInput}
-                  />
-          </div>
-          <div>
-            numero: <input 
-                    value={this.state.newNumber}
-                    onChange={this.handleNumberInput}
-                  />
-          </div>
-          <div>
-            <button 
-              type="submit">lisää
-            </button>
-          </div>
-      </form>
-        <h2>Numerot</h2>
-        <table>
-        <tbody>
-          {this.state.persons.map((person,i) => <Person key={i} person={person}/>)}
-       </tbody>
-        </table>
+        <NewEntryForm />
+        <ViewEntry list={this.persons.this.state}/>
         
-
-      
       </div>
     )
     
