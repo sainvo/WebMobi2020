@@ -1,10 +1,24 @@
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
 
-//const api = 'This is the backend of a simple phonebook. Access the content at xxx'
+//middleware
+const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
+const logger = (req,res,next)=>{
+    console.log('Method: ', req.method)
+    console.log('Path: ', req.path)
+    console.log('Body: ', req.body)
+    console.log('------------')
+    next()
+}
+app.use(logger)
+
+//CORS
+const cors = require('cors')
+app.use(cors())
+
+//hard-coded list
 let persons = [
     {
         name:"Arto Hellas",
@@ -27,14 +41,12 @@ let persons = [
         id: 4
       }
 ]
+
+//HTTP request route handlers
 app.get('/api', (req,res) =>{
     res.send('<h2>This is the backend of a phonebook</h2>')
 })
-/*
-app.get('/api', (req,res)=>{
-    response.send({api})
-})
-*/
+
 app.get('/api/persons', (req, res) =>{
     res.json(persons)
 })
@@ -65,12 +77,13 @@ const generateID = () =>{
 
 app.post('/api/persons', (req,res) =>{
     const body = req.body
+    console.log(body)
     var newPerson = {
         name: '',
         number: ''
     }
     if(body.name === undefined){
-        return res.status(404).json({error: 'name missing'}).end()
+        return res.status(404).json({error: 'name missing'})
     }
     else if(body.number === undefined){
         return res.status(404).json({error: 'number missing'})
@@ -89,8 +102,7 @@ app.post('/api/persons', (req,res) =>{
                 return res.status(403).json({error: 'number already exists'})
             }
         }else{
-            return res.status(403).json({error: 'name must be unique'}).end()
-            
+            return res.status(403).json({error: 'name must be unique'})  
         }
         
     }
@@ -107,7 +119,12 @@ app.post('/api/persons', (req,res) =>{
    
     res.json(newPerson)
 })
-
+const error = (request, response) => {
+    response.status(404).send({error: 'unknown endpoint'})
+  }
+  
+app.use(error)
+//event listener for server
 const PORT = 3002
 app.listen(PORT, () =>{
 
