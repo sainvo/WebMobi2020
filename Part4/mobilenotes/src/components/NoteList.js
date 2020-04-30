@@ -12,8 +12,11 @@ const NoteList = ({navigation}) => {
           data.map((note) =>
                <View key={note.id}>
                     <TouchableOpacity
+                         
                          onPress={() => navigation.navigate('Read', { id: note.id })}
-                    >
+               >
+                    
+                    
                          <View style={styles.row}>
                               <Text style={styles.title}
                                    accessibilityLabel="This is the title of the note on this row. If clicked, it will open the full note on a new window."
@@ -27,8 +30,10 @@ const NoteList = ({navigation}) => {
                                    >
                               </TouchableOpacity>
                          </View>
-                    </TouchableOpacity>
-               </View>
+                    
+                   
+               </TouchableOpacity>
+               </View >
 
           ));
 
