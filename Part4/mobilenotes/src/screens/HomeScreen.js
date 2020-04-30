@@ -13,15 +13,17 @@ const HomeScreen = () => {
      
      return (
           
-          <View style={styles.container}>
+          <View style={styles.viewParent}>
                <Text
                     style={styles.text}
                     accessibilityLabel="Welcome to MobileNotes App!"
                >
                     Welcome to MobileNotes App!</Text>
                     
-               <SafeAreaView contentContainerStyle={styles.container}> 
-                    <NoteList />
+               <SafeAreaView > 
+                    <ScrollView contentContainerStyle={styles.container}>
+                         <NoteList />
+                    </ScrollView>
                </SafeAreaView>
           </View>
      )
@@ -40,14 +42,17 @@ HomeScreen.navigationOptions = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    
+     viewParent: {
+          backgroundColor: 'green', flex:1
+    },
      container: {
-          flexDirection: "column",
           backgroundColor: 'lightblue',
-          margin: 10 
+          margin: 10
      },
      text: {
           fontSize: 20,
+          fontWeight:'bold',
+          color: 'white',
           textAlign: 'center',
           marginTop: 10
      },
