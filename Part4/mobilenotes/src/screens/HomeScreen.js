@@ -1,30 +1,55 @@
 import React, { useContext, useState } from "react";
-import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView} from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity, FlatList} from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { Context } from '../context/NoteContext';
-import NoteList from "../components/NoteList";
 
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
      //touchable has a fade response and can have multiple items inside it
      //const { state, deleteNote } = useContext(Context);
-    
+     const { state, deleteNote } = useContext(Context);
      
      return (
           
-          <View style={styles.viewParent}>
+          <View style={styles.container}>
                <Text
                     style={styles.text}
                     accessibilityLabel="Welcome to MobileNotes App!"
                >
                     Welcome to MobileNotes App!</Text>
                     
-               <SafeAreaView > 
-                    <ScrollView contentContainerStyle={styles.container}>
-                         <NoteList />
-                    </ScrollView>
-               </SafeAreaView>
+               <SafeAreaView>
+                    
+                    <FlatList
+                         contentContainerStyle={styles.container}
+                         data={state}
+                         keyExtractor={(item => item.id)}
+                         renderItem={({ item }) => {
+                              console.log('note id:', item.id, ', title: ', item.title);
+                              return (
+                                   <TouchableOpacity
+                                        onPress={() => navigation.navigate('Read', { id: item.id })}
+                                   >
+                                        <View style={styles.row}>
+                                             <Text style={styles.title}
+                                                  accessibilityLabel="This is the title of the note on this row. If clicked, it will open the full note on a new window."
+                                             >
+                                                  {item.title}
+                                             </Text>
+                                             <TouchableOpacity onPress={() => deleteNote(item.id)}>
+                                                  <FontAwesome
+                                                       style={styles.icon} name='trash' color='black'
+                                                       accessibilityLabel="This is a trashcan icon. It deletes the note on this row if clicked." /
+                                                  >
+                                             </TouchableOpacity>
+                                        </View>
+                                   </TouchableOpacity>
+                              );
+                         }}
+                         
+                    />
+          </SafeAreaView>
           </View>
      )
 };
@@ -42,23 +67,31 @@ HomeScreen.navigationOptions = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-     viewParent: {
-          backgroundColor: 'green', flex:1
-    },
+    
      container: {
+          flexDirection: "column",
           backgroundColor: 'lightblue',
-          margin: 10
+          margin: 10 
      },
      text: {
           fontSize: 20,
-          fontWeight:'bold',
-          color: 'white',
           textAlign: 'center',
           marginTop: 10
      },
-     
+     row: {
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingVertical: 20,
+          paddingHorizontal: 10,
+          borderWidth: 1,
+          borderColor: 'gray',
+          backgroundColor: 'lightgreen'
+     },
      title: {
           fontSize: 18,
+     },
+     icon: {
+          fontSize: 24
      },
      plus: {
           marginRight: 15,
