@@ -1,35 +1,42 @@
-import React, { useState } from 'react';
-//import React, { useReducer } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, Alert} from 'react-native';
+import { Context } from '../context/NoteContext';
+import NoteForm from '../components/NoteForm';
+//import validate from '../components/FormValidation';
+
 //textInput has zero styling as default!!!!
 //autoprops: for input you don't want OS to mess with aka autoformat
-const TextScreen = () => {
-     const [newNote, setNewNote] = useState('');
 
-     return (
-          <View>
-               <Text>Write note:</Text>
-               <TextInput
-                    style={styles.input}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    value={newNote}
-                    onChangeText={(newInput) =>
-                         setNewNote(newInput)
-                    }
-               />
-               {password.length < 5 ? <Text> Password has to be over 5 characters</Text> : null}
-          </View>
-     )
-}
+const AddNoteScreen = ({ navigation }) => {
+     //const state = useContext(Context);
+     //console.log(state);
+     const { addNote} = useContext(Context);
+     return <NoteForm
+          onSubmit={(title, content) => {
+               addNote(title, content, () => navigation.navigate('Home'))
+          }}
+     />;
+};
+          
 const styles = StyleSheet.create({
+     parentStyle: {
+          flexDirection: 'row',
+          alignItems: 'center',
+          padding: 20
+     },
      input: {
-          height: 30,
+          textAlignVertical:'top',
+          height: 300,
           margin: 20,
           borderColor: 'red',
           borderWidth: 1,
           fontSize: 20
+     },
+     buttonStyle: {
+          padding: 5,
+          borderColor: 'black',
+          borderWidth:2
      }
 });
 
-export default TextScreen;
+export default AddNoteScreen;

@@ -1,32 +1,32 @@
-import { NavigationContainer } from '@react-navigation/native';
-import {createAppContainer} from '@react-navigation/container'
-import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { Provider } from './src/context/NoteContext';
 import HomeScreen from './src/screens/HomeScreen';
 import AddNoteScreen from './src/screens/AddNoteScreen';
-import ShowNotesScreen from './src/screens/ShowNotesScreen';
+import ReadNoteScreen from './src/screens/ReadNoteScreen';
+import EditNoteScreen from './src/screens/EditNoteScreen';
+
 
 const navigator = createStackNavigator(
      {
           Home: HomeScreen,
-          List: ShowNotesScreen,
+          Read: ReadNoteScreen,
           Add: AddNoteScreen,
+          Edit: EditNoteScreen
+
      },
      {
           initialRouteName: "Home",
           defaultNavigationOptions: {
-               title: "App", 
-               style: styles.container
+               title: "Mobile Notes"
           }
      }
 );
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-export default createAppContainer(navigator);
+const App = createAppContainer(navigator);
+export default() => {
+     return <Provider>
+          <App />
+     </Provider>
+};
