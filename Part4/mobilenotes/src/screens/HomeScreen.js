@@ -1,85 +1,64 @@
-import React from "react";
-import { Text, StyleSheet, View, Button, ScrollView, FlatList } from "react-native";
+import React, { useContext, useState } from "react";
+import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView} from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import NoteDetail from '../components/NoteDetail';
-import Constants from 'expo-constants';
+import { Feather, FontAwesome } from '@expo/vector-icons';
+import { Context } from '../context/NoteContext';
+import NoteList from "../components/NoteList";
 
-const notes = [
-     { title: 'First', content: 'Note 1', id: '1' },
-     { title: 'Second', content: 'Note 2', id: '2' },
-     { title: 'Third', content: 'Note 3', id: '3' },
-     { title: 'Fourth', content: 'Note 4', id: '4' },
-     { title: 'Fifth', content: 'Note 5', id: '5' },
-     { title: 'Sixth', content: 'Note 6', id: '6' }
-];
 
-const NoteList = () => {
-     return (
-          <ScrollView style={styles.container}>
-               <FlatList 
-                    //horizontal //tells the list which way it is laid out and scrolled
-                    //showsHorizontalScrollIndicator={false} //hides the scroll bar
-                    keyExtractor={(note) => note.id} //another way to add key property
-                    data={notes}
-                    renderItem={({ item }) => {
-                         return <NoteDetail
-                              title={item.title}
-                              content={item.content}
-                         />
-                    }}
-               
-                    
-                    />
-          </ScrollView>
-     )
-}
-
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
      //touchable has a fade response and can have multiple items inside it
-     //console.log(props.navigation);
-     return <View style={styles.viewParent}>
-          <Text style={styles.text}>Welcome to MobileNotes App!</Text>
-          <View style = {styles.buttonParent}>
-               <Button
-                    title="Add new Note"
-                    onPress={() => navigation.navigate('Add')}
-                    color='red'
-                    accessibilityLabel = "Go to the screen where you can create and add a new note"
-               />
-          </View>
-          <SafeAreaView style={styles.viewParent}>
+     //const { state, deleteNote } = useContext(Context);
+    
+     
+     return (
+          
+          <View style={styles.container}>
+               <Text
+                    style={styles.text}
+                    accessibilityLabel="Welcome to MobileNotes App!"
+               >
+                    Welcome to MobileNotes App!</Text>
+                    
+               <SafeAreaView contentContainerStyle={styles.container}> 
                     <NoteList />
-          </SafeAreaView>
-     </View>
+               </SafeAreaView>
+          </View>
+     )
+};
+HomeScreen.navigationOptions = ({ navigation }) => {
+     return {
+          headerRight: () =>
+               <TouchableOpacity onPress={() => navigation.navigate('Add')}>
+                    <View style={styles.plus}>
+                         <Feather name="plus" color='green' size={34}
+                              accessibilityLabel="This is a plus icon. If clicked, it will open a new view for creating a new note."
+                         />
+                    </View>
+               </TouchableOpacity>
+     }
 };
 
 const styles = StyleSheet.create({
-     viewParent: {
-          flexDirection: 'column',
-          alignItems: 'stretch'
-     },
+    
      container: {
           flexDirection: "column",
-          backgroundColor: 'green',
-          margin: 5
-     },
-     buttonParent: {
-          padding: 20,
-          flexDirection: "column",
-          alignItems: "center",
-          margin: 5,
-          borderColor: 'red',
-          borderWidth: 1
-     },
-     button: {
-          padding: 5,
-          margin: 5,
-          borderColor: 'red',
-          borderWidth: 4
+          backgroundColor: 'lightblue',
+          margin: 10 
      },
      text: {
           fontSize: 20,
-          textAlign: 'center'
+          textAlign: 'center',
+          marginTop: 10
+     },
+     
+     title: {
+          fontSize: 18,
+     },
+     plus: {
+          marginRight: 15,
+          borderWidth: 1,
+          borderColor: 'green'
      }
 });
 
